@@ -16,7 +16,9 @@ USER_PLUGINS_DIR = -2
 
 
 def main() -> None:
-    log_filename = pathlib.Path(vs.GetFolderPath(USER_PLUGINS_DIR)) / "adi_script.log"
+    log_filename = (
+        pathlib.Path(vs.GetFolderPath(USER_PLUGINS_DIR)) / "nla_callout_class.log"
+    )
     logging.basicConfig(filename=log_filename, level=LOG_LEVEL)
 
     updated = 0
