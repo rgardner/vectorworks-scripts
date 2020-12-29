@@ -20,7 +20,7 @@ class RenderStyle(enum.IntEnum):
 
 
 def scale(numerator: float, denominator: float) -> float:
-    """Convert vp.Scale parameter from architectural scale."""
+    """Convert architectural scale to vp.Scale parameter."""
     return (denominator / numerator) * 12  # 12"
 
 
@@ -28,9 +28,10 @@ def main() -> None:
     def create_viewport(obj) -> None:
         if obj.selected:
             layer = vs.GetLayer(obj)
-            # Separate viewports for better group/move UX
-            vs.Move(10, 0)  # right, up
             vp = vs.CreateVP(layer)
+            # Render twice (first using WIREFRAME) to avoid "red cross" when
+            # changing variables.
+            # https://forum.vectorworks.net/index.php?/topic/74320-exporting-rendersimages-to-folder/&tab=comments#comment-360809
             vs.SetObjectVariableInt(
                 vp, ObjectIndex.VP_RENDER_TYPE, RenderStyle.WIREFRAME
             )
@@ -38,6 +39,9 @@ def main() -> None:
             vs.UpdateVP(vp)
             vs.SetObjectVariableInt(vp, ObjectIndex.VP_RENDER_TYPE, RenderStyle.OPENGL)
             vs.UpdateVP(vp)
+
+            # Separate viewports for better group/move UX
+            vs.HMove(obj, 10, 0)
 
     vs.ForEachObject(create_viewport, "T=RECT")
 
