@@ -24,7 +24,6 @@ def setup() -> None:
                 zip.extract("vs.py", output)
 
 
-
 def parse_args(args: List[str]) -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
     return parser.parse_args(args)

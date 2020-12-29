@@ -12,6 +12,7 @@ class ObjectIndex(enum.IntEnum):
     VP_RENDER_TYPE = 1001
     VP_SCALE = 1003
 
+
 @enum.unique
 class RenderStyle(enum.IntEnum):
     WIREFRAME = 0
@@ -20,20 +21,24 @@ class RenderStyle(enum.IntEnum):
 
 def scale(numerator: float, denominator: float) -> float:
     """Convert vp.Scale parameter from architectural scale."""
-    return (denominator / numerator) * 12 # 12"
+    return (denominator / numerator) * 12  # 12"
+
 
 def main() -> None:
     def create_viewport(obj) -> None:
         if obj.selected:
             layer = vs.GetLayer(obj)
             # Separate viewports for better group/move UX
-            vs.Move(10, 0) # right, up
+            vs.Move(10, 0)  # right, up
             vp = vs.CreateVP(layer)
-            vs.SetObjectVariableInt(vp, ObjectIndex.VP_RENDER_TYPE, RenderStyle.WIREFRAME)
+            vs.SetObjectVariableInt(
+                vp, ObjectIndex.VP_RENDER_TYPE, RenderStyle.WIREFRAME
+            )
             vs.SetObjectVariableReal(vp, ObjectIndex.VP_SCALE, scale(1, 2))
             vs.UpdateVP(vp)
             vs.SetObjectVariableInt(vp, ObjectIndex.VP_RENDER_TYPE, RenderStyle.OPENGL)
             vs.UpdateVP(vp)
+
     vs.ForEachObject(create_viewport, "T=RECT")
 
 
