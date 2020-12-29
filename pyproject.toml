@@ -1,0 +1,10 @@
+[tool.pylint."MESSAGES CONTROL"]
+disable = """
+    invalid-name,
+    missing-module-docstring,
+    missing-class-docstring,
+    missing-function-docstring,
+"""
+
+[tool.pylint.TYPECHECK]
+ignored-modules = "vs"

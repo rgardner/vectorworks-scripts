@@ -6,7 +6,6 @@ import argparse
 import io
 import pathlib
 import sys
-import tempfile
 import urllib.request
 import zipfile
 from typing import List
@@ -20,8 +19,8 @@ def setup() -> None:
     output.mkdir(exist_ok=True)
     if not (output / "vs.py").exists():
         with urllib.request.urlopen(VS_ZIP_FILE_URL) as resp:
-            with io.BytesIO(resp.read()) as buf, zipfile.ZipFile(buf) as zip:
-                zip.extract("vs.py", output)
+            with io.BytesIO(resp.read()) as buf, zipfile.ZipFile(buf) as zipf:
+                zipf.extract("vs.py", output)
 
 
 def parse_args(args: List[str]) -> argparse.Namespace:
@@ -30,7 +29,7 @@ def parse_args(args: List[str]) -> argparse.Namespace:
 
 
 def main(raw_args: List[str]) -> None:
-    args = parse_args(raw_args)
+    parse_args(raw_args)
     setup()
 
 

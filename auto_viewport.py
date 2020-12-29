@@ -4,7 +4,7 @@
 
 import enum
 
-import vs
+import vs  # pylint: disable=syntax-error
 
 
 @enum.unique
