@@ -19,11 +19,17 @@ Double-click the script label in the resource browser.
 Setup the project (e.g. download `vs.py`):
 
 ```bash
-./x
+./x.py
 ```
 
 Add the `build` folder to the Python paths setting in your IDE to get
-completions.
+completions for the `vs` module.
+
+Run tests:
+
+```bash
+./x.py ci
+```
 
 ## Reference
 
