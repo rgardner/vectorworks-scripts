@@ -15,13 +15,10 @@ LOG_LEVEL = logging.DEBUG
 USER_PLUGINS_DIR = -2
 
 
-def setup_logging() -> None:
-    filename = pathlib.Path(vs.GetFolderPath(USER_PLUGINS_DIR)) / "adi_script.log"
-    logging.basicConfig(filename=filename, level=LOG_LEVEL)
-
-
 def main() -> None:
-    setup_logging()
+    log_filename = pathlib.Path(vs.GetFolderPath(USER_PLUGINS_DIR)) / "adi_script.log"
+    logging.basicConfig(filename=log_filename, level=LOG_LEVEL)
+
     updated = 0
     total = 0
 
@@ -36,7 +33,7 @@ def main() -> None:
         total += 1
 
     vs.ForEachObject(set_class, "(R IN ['Callout']) & C<>'{}'".format(IGNORE_CLASS))
-    vs.AlrtDialog("Updated {} of {} callouts".format(updated, total))
+    vs.AlrtDialog("Updated {} of {} callouts\n{}".format(updated, total, log_filename))
 
 
 if __name__ == "__main__":
