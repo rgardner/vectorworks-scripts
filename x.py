@@ -25,10 +25,14 @@ def run_setup() -> None:
 
     output = SCRIPT_DIR / "build"
     output.mkdir(exist_ok=True)
-    if not (output / "vs.py").exists():
+    vs_py = output / "vs.py"
+    if not vs_py.exists():
         with urllib.request.urlopen(VS_ZIP_FILE_URL) as resp:
             with io.BytesIO(resp.read()) as buf, zipfile.ZipFile(buf) as zipf:
                 zipf.extract("vs.py", output)
+        subprocess.run(
+            ["patch", str(vs_py), str(SCRIPT_DIR / "tools" / "vs.py.patch")], check=True
+        )
 
 
 def run_ci() -> None:

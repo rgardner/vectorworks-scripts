@@ -4,7 +4,7 @@
 
 import enum
 
-import vs  # pylint: disable=syntax-error
+import vs
 
 
 @enum.unique
@@ -40,7 +40,7 @@ def main() -> None:
             vs.SetObjectVariableBoolean(
                 vp, ObjectIndex.VP_USE_DOCUMENT_CLASS_VISIBILITY, True
             )
-            vs.SetVPCropObject(obj)
+            vs.SetVPCropObject(vp, obj)
             vs.UpdateVP(vp)
 
             # Separate viewports for better group/move UX

@@ -2,7 +2,7 @@
 
 """Analyze VectorWorks file for notable signatures."""
 
-import vs  # pylint: disable=syntax-error
+import vs
 
 
 def main():

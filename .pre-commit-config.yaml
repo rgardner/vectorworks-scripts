@@ -5,11 +5,17 @@ repos:
       - id: check-yaml
       - id: end-of-file-fixer
       - id: trailing-whitespace
+        exclude: ^tools/vs.py.patch
   - repo: local
     hooks:
       - id: black
         name: black
         entry: black
+        language: system
+        types: [python]
+      - id: mypy
+        name: mypy
+        entry: mypy
         language: system
         types: [python]
       - id: pylint

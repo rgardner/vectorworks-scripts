@@ -5,7 +5,7 @@
 import logging
 import pathlib
 
-import vs  # pylint: disable=syntax-error
+import vs
 
 CLASS = "ANNO-NOTES"
 IGNORE_CLASS = "ANNO-GRAPHIC TAGS"
